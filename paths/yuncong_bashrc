@@ -1,0 +1,93 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific aliases and functions
+
+#source /oasis/projects/nsf/csd181/hadoop/hadoop_shared/hadoop_bashrc.sh
+
+gnu_lib=/opt/lapack/gnu/lib
+export BLAS=$gnu_lib/libblas.so
+export LAPACK=$gnu_lib/liblapack.so
+export LD_LIBRARY_PATH=$gnu_lib:$LD_LIBRARY_PATH
+
+#export PATH=/oasis/scratch/csd181/hadoop/admin_scripts:
+export PATH=/home/yuncong/cmake-2.8.10.2/release/bin:$PATH
+export PATH=/opt/qt/bin:$PATH
+
+alias notebook='jupyter notebook --config=~/.ipython/profile_parallel/ipython_notebook_config.py'
+
+export LD_LIBRARY_PATH=/opt/python/lib:$LD_LIBRARY_PATH
+export PATH=/home/yuncong/screen-4.0.3/bin:$PATH
+export PATH=/oasis/projects/nsf/csd181/yuncong/virtualenv-1.9.1/yuncongve/bin:$PATH
+
+# numpy and scipy compiled with MKL, so need to source this script
+source /oasis/projects/nsf/csd395/yuncong/intel/bin/compilervars.sh -arch intel64 -platform linux
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/yuncong/openjpeg-2.1.0-Linux-i386/lib
+export PATH=$PATH:/home/yuncong/openjpeg-2.1.0-Linux-i386/bin
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/yuncong/csd395/KDU77_Demo_Apps_for_Linux-x86-64_150710
+export PATH=/home/yuncong/csd395/KDU77_Demo_Apps_for_Linux-x86-64_150710:$PATH
+
+export PATH=/home/yuncong/csd395/pigz-2.3.3:$PATH
+
+top_name_func() {
+  top -p `pgrep $1 | tr "\\n" "," | sed 's/,$//'`
+}
+alias top_name=top_name_func
+
+# =============================
+# setup brainstem project paths
+
+CSD395=/oasis/projects/nsf/csd395/yuncong
+source $CSD395/Brain/setup2015.sh
+
+CSD181=/oasis/projects/nsf/csd181/yuncong
+# For ndpitools programs, i.e. ndpi2tiff and ndpisplit
+export PATH=$PATH:$HOME/project
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CSD181/hdf5-1.8.13/lib
+
+# For caffe
+#module load boost
+#module load hdf5
+export PATH=$PATH:$CSD181/protobuf-2.6.1-release/bin
+export LD_LIBRARY_PATH=$CSD181/boost_1_58_0-release/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$CSD181/glog-0.3.4-release/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$CSD181/protobuf-2.6.1-release/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$CSD181/leveldb-1.18:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$CSD181/lmdb-LMDB_0.9.14/libraries/liblmdb:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$CSD181/snappy-1.1.1/release/lib:$LD_LIBRARY_PATH
+
+# required by caffe, was compiled using opencv-3.0, but this does not install python binding for some reason
+# export LD_LIBRARY_PATH=$CSD181/opencv/release/lib:$LD_LIBRARY_PATH
+
+export PATH=$CSD181/cmake-3.2.2-release/bin:$PATH
+
+export PATH=$CSD395/patchelf-0.8/src:$PATH
+
+export PATH=$CSD395/tiff-4.0.5-release/bin:$PATH
+#export LD_LIBRARY_PATH=/home/yuncong/csd395/tiff-4.0.5-release/lib:$LD_LIBRARY_PATH
+
+export PATH=$CSD395/ImageMagick-6.9.2-0-release/bin:$PATH
+#export LD_LIBRARY_PATH=/home/yuncong/csd395/ImageMagick-6.9.2-0-release/lib:$PATH
+
+#export PATH=/home/yuncong/csd395/glibc-2.22-release/lib:$PATH
+#export LD_LIBRARY_PATH=/home/yuncong/csd395/glibc-2.22-release/lib:$LD_LIBRARY_PATH
+
+export LD_LIBRARY_PATH=$CSD395/elastix_linux64_v4.7/lib:$LD_LIBRARY_PATH
+export PATH=$CSD395/elastix_linux64_v4.7/bin:$PATH
+
+export PATH=$CSD395/parallel-20150822-release/bin:$PATH
+export PATH=$CSD395/ffmpeg-git-20150927-64bit-static:$PATH
+
+export LD_LIBRARY_PATH=/oasis/projects/nsf/csd395/yuncong/libxml2-2.9.2-release/lib/:/oasis/projects/nsf/csd395/yuncong/libxslt-1.1.28-release/lib:$LD_LIBRARY_PATH
+
+alias check_csd395_quota='lfs quota -g csd395 /oasis/projects/nsf'
+
+# OpenBlas
+export LD_LIBRARY_PATH=/oasis/projects/nsf/csd395/yuncong/OpenBLAS-0.2.15:$LD_LIBRARY_PATH
